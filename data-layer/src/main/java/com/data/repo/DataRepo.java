@@ -3,12 +3,30 @@ package com.data.repo;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
+import com.data.model.Device;
+
+@Service
 public class DataRepo {
 
-	public Map<Integer,String> repo(){
-		Map<Integer,String> data=new HashMap<>();
-		data.put(1,"Digital");
-		data.put(2,"Commerce");
-		return data;
+	private Map<Integer,Device> data;
+	private final int ZERO=0;
+	
+	DataRepo(){
+		data=new HashMap<>();
+	}
+	
+	
+	public void write(Device device){
+		if(device.getDeviceid()==ZERO){			
+			data.put(device.getDeviceid()+1, device);
+		}else{
+			data.put(device.getDeviceid(), device);
+		}
+	}
+	
+	public Map<Integer,Device> read(){
+		return data;		
 	}
 }
